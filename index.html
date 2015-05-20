@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Instagram Searcher</title>
+    <!--<script data-require="angular.js@1.3.10" data-semver="1.3.10"-->
+            <!--src="https://code.angularjs.org/1.3.10/angular.js"></script>-->
+    <link rel="stylesheet" href="style.css"/>
+
+    <!--<script data-require="angular.js@1.3.10" data-semver="1.3.10"-->
+            <!--src="https://code.angularjs.org/1.3.10/angular.js"></script>-->
+    <!--<script src="angular-messages.js"></script>-->
+    <!--<script type="text/javascript" src="https://code.angularjs.org/1.2.18/angular-animate.min.js"></script>-->
+    <!--<script src="script.js"></script>-->
+
+</head>
+
+<body ng-app="myApp" ng-controller="MyCtrl">
+
+<div>
+    <img src="ng-instagram.png"><img>
+
+    <!--<h1>Search Instagram for Photos </h1>-->
+
+    <form name="myForm" novalidate>
+        <input type="text" ng-model="tagName" name="tagName" placeholder="Enter a tag to search" required />
+        <button ng-click="searchInstagram(tagName)" id="submit">Submit</button>
+        <button ng-if="submitted" ng-click="reset()" id="submit">Reset</button>
+
+        <!--<pre>myForm.tagName.$error</pre>-->
+        <!--<pre>{{ myForm.tagName.$error | json }}</pre>-->
+        <!--<pre>myForm.tagName.$valid</pre>-->
+        <!--<pre>{{ myForm.tagName.$valid | json }}</pre>-->
+
+        <!--<span class="error" ng-if="myForm.$submitted && myForm.tagName.$error.required">A name is required!</span>-->
+
+        <div ng-if="myForm.$submitted" ng-messages="myForm.tagName.$error">
+            <span class="error" ng-message="required">Please enter a tag to search for.</span>
+        </div>
+
+    </form>
+</div>
+
+<div class="results" ng-if="searching && notReset">
+    <h1>Searching Instagram for photos tagged with "{{tagName}}"</h1>
+</div>
+
+<div class="results" ng-if="!searching && results && notReset">
+    <h1>We found {{results.length}} results for "{{tagShow}}"</h1>
+    <h1>Click on an image to see it in a new tab.</h1>
+
+    <div ng-repeat-start="result in results" class="result">
+        <a href="{{result.link}}" target="_blankl">
+            <img ng-src="{{result.images.low_resolution.url}}" title="{{result.caption.text}}" max-width="200px"></img>
+        </a>
+    </div>
+    <div ng-repeat-end=""></div>
+</div>
+
+<!--<div class="results" ng-if="!results && notReset">-->
+    <!--<h1>We found 0 results for {{tagShow}}</h1>-->
+
+    <!--<div ng-repeat-start="result in results" class="imgShow">-->
+        <!--<a href="{{result.link}}">-->
+            <!--<img ng-src="{{result.images.low_resolution.url}}" title="{{result.caption.text}}" max-width="200px"></img>-->
+        <!--</a>-->
+    <!--</div>-->
+    <!--<div ng-repeat-end=""></div>-->
+<!--</div>-->
+
+<script data-require="angular.js@1.3.10" data-semver="1.3.10"
+        src="https://code.angularjs.org/1.3.10/angular.js"></script>
+<script src="angular-messages.js"></script>
+<script type="text/javascript" src="https://code.angularjs.org/1.2.18/angular-animate.min.js"></script>
+<script src="script.js"></script>
+
+
+</body>
+</html>
